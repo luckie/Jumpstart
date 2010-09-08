@@ -1,8 +1,11 @@
-# Standard Application Template
-# Lee Smith 2010-09-07
-
 # Delete unnecessary files
   run "rm public/index.html"
+  run "rm README"
+
+# Create basic README file
+  file 'README', <<-EOF
+    Basic Rails 3 App based on Luckie's Rails Template
+  EOF
 
 # Replace default js with jQuery
   run "rm -f public/javascripts/*"
@@ -11,44 +14,38 @@
 # Copy database.yml for distribution use
   run "cp config/database.yml config/database.example.yml"
 
-# Set up .gitignore
-  file '.gitignore', <<-END
-.DS_Store
-log/*.log
-tmp/**/*
-tmp/*
-config/database.yml
-config/deploy.rb
-db/*.sqlite3
-doc/api
-doc/app
-*.swo
-*.swp
-*.swn
-END
+
+  open('.gitignore', 'a') { |f|
+    f.puts '.DS_Store'
+    f.puts 'config/database.yml'
+    f.puts 'config/deploy.rb'
+    f.puts 'doc/api'
+    f.puts 'doc/app'
+    f.puts '*.swo'
+    f.puts '*.swp'
+    f.puts '*.swn'
+  }
 
 # Declare global gems
-  gem 'erubis', :version => '>= 2.6.5'
-  gem 'haml', :version => '>= 3.0.18'
-  gem 'will_paginate', :version => '2.3.14'
+  gem 'haml'
+  gem 'will_paginate', '3.0.pre2'
   gem 'devise'
   gem 'warden'
 
-  gem 'factory_girl', :version => '1.3.2'
-  gem 'fakeweb', :version => '1.3.0'
-  gem 'ffaker', :version => '0.4.0'
-  gem 'mocha', :version => '0.9.8'
-  gem 'rspactor', :version => '0.6.4'
-  gem 'rspec', :version => '1.3.0', :lib => false
-  gem 'rspec-rails', :version => '1.3.0', :lib => false
-  gem 'shoulda', :version => '2.11.3', :lib => 'false'
-  gem 'webrat', :version => '0.7.1'
+  gem 'factory_girl', :group => :test
+  gem 'ffaker', :group => :test
+  gem 'mocha', :group => :test
+  gem 'rspactor', :group => :test
+  gem 'webrat', :group => :test
+  gem 'shoulda', :group => :test
+  gem 'rspec-rails', '2.0.0.beta.20', :group => [:test, :development]
 
 # Install gems
-  rake('gems:install')
+  run "bundle install"
 
 # Test setup
-  generate('rspec')
+  puts "Generating Rspec"
+  generate('rspec:install')
   run "rm -rf test/"
   run "mkdir spec/factories"
 

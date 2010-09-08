@@ -1,0 +1,3 @@
+Command:
+
+rails my_app -d mysql -m ~/projects/jumpstart/luckie_template.rb

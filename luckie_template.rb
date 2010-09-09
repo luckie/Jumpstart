@@ -4,7 +4,7 @@
 
 # Create basic README file
   file 'README', <<-EOF
-    Basic Rails 3 App based on Luckie's Rails Template
+    Basic Rails 2.3.5 App based on Luckie's Rails Template
   EOF
 
 # Replace default js with jQuery
@@ -14,38 +14,41 @@
 # Copy database.yml for distribution use
   run "cp config/database.yml config/database.example.yml"
 
-
-  open('.gitignore', 'a') { |f|
-    f.puts '.DS_Store'
-    f.puts 'config/database.yml'
-    f.puts 'config/deploy.rb'
-    f.puts 'doc/api'
-    f.puts 'doc/app'
-    f.puts '*.swo'
-    f.puts '*.swp'
-    f.puts '*.swn'
-  }
+# Create .gitignore file with basic options
+  file '.gitignore', <<-END
+  .DS_Store
+  log/*.log
+  tmp/**/*
+  config/database.yml
+  config/deploy.rb
+  db/*.sqlite3
+  doc/api
+  doc/app
+  *.swo
+  *.swp
+  *.swn
+  END
 
 # Declare global gems
   gem 'haml'
-  gem 'will_paginate', '3.0.pre2'
-  gem 'devise'
-  gem 'warden'
+  gem 'will_paginate'
+  gem 'devise', :version => '1.0.8'
+  gem 'warden', :version => '1.9.7'
 
-  gem 'factory_girl', :group => :test
-  gem 'ffaker', :group => :test
-  gem 'mocha', :group => :test
-  gem 'rspactor', :group => :test
-  gem 'webrat', :group => :test
-  gem 'shoulda', :group => :test
-  gem 'rspec-rails', '2.0.0.beta.20', :group => [:test, :development]
+  gem 'factory_girl'
+  gem 'ffaker'
+  gem 'mocha'
+  gem 'rspactor'
+  gem 'webrat'
+  gem 'shoulda'
+  gem 'rspec-rails'
 
 # Install gems
-  run "bundle install"
+  rake("gems:install")
 
 # Test setup
   puts "Generating Rspec"
-  generate('rspec:install')
+  generate('rspec')
   run "rm -rf test/"
   run "mkdir spec/factories"
 

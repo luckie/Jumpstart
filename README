@@ -1,4 +1,12 @@
-Luckie Base Rails 3 Application Template
+Rails 2.3.5
+
+To create a new Rails 2.3.5 app based on the Luckie Template:
+
+  rails my_app --database=mysql --template=~/projects/jumpstart/luckie_template.rb
+
+==========================================
+
+Rails 3.0
 
 NOTE: This template requires Ruby 1.9 and Rails 3
 
@@ -12,4 +20,4 @@ If you don't already have Rails 3 running:
 
 To create a new Rails 3 app based on the Luckie Template:
 
-  rails new my_app --database=mysql --template=~/projects/jumpstart/luckie_template.rb
+  rails new my_app --database=mysql --template=~/projects/jumpstart/luckie_rails3_template.rb

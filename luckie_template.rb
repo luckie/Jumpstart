@@ -4,7 +4,7 @@
 
 # Create basic README file
   file 'README', <<-EOF
-    Basic Rails 2.3.5 App based on Luckie's Rails Template
+  Basic Rails 2.3.5 App based on Luckie's Rails Template
   EOF
 
 # Replace default js with jQuery
@@ -33,15 +33,15 @@
   gem 'haml'
   gem 'will_paginate'
   gem 'devise', :version => '1.0.8'
-  gem 'warden', :version => '1.9.7'
+  gem 'warden', :version => '0.10.7'
 
   gem 'factory_girl'
   gem 'ffaker'
   gem 'mocha'
   gem 'rspactor'
   gem 'webrat'
-  gem 'shoulda'
-  gem 'rspec-rails'
+  gem 'shoulda', :lib => false
+  gem 'rspec-rails', :lib => false
 
 # Install gems
   rake("gems:install")

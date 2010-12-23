@@ -9,7 +9,7 @@
 
 # Replace default js with jQuery
   run "rm -f public/javascripts/*"
-  run "curl -L http://code.jquery.com/jquery-1.4.2.min.js > public/javascripts/jquery.js"
+  run "curl -L http://code.jquery.com/jquery-1.4.4.min.js > public/javascripts/jquery.js"
 
 # Copy database.yml for distribution use
   run "cp config/database.yml config/database.example.yml"
@@ -27,27 +27,37 @@
   }
 
 # Declare global gems
+  gem 'decent_exposure', '1.0.0.rc1'
+  gem 'devise', '1.1.2'
   gem 'haml'
+  gem 'pg'
+  gem 'rails', '3.0.3'
+  gem 'ruby-debug'
   gem 'will_paginate', '3.0.pre2'
-  gem 'devise'
-  gem 'warden'
 
-  gem 'factory_girl_rails', :group => :test
-  gem 'ffaker', :group => :test
-  gem 'mocha', :group => :test
-  gem 'rspactor', :group => :test
-  gem 'webrat', :group => :test
-  gem 'shoulda', :group => :test
-  gem 'rspec-rails', '2.0.0.beta.20', :group => [:test, :development]
+  group :development, :test do
+    gem 'capybara', '~> 0.4.0'
+    gem 'cucumber-rails'
+    gem 'database_cleaner'
+    gem 'factory_girl_rails'
+    gem 'ffaker'
+    gem 'launchy'
+    gem 'mocha', '0.9.7'
+    gem 'pickler', '~> 0.1.7'
+    gem 'rspec-rails', '2.0.1'
+    gem 'shoulda'
+    gem 'spork'
+  end
 
 # Install gems
   run "bundle install"
 
 # Test setup
-  puts "Generating Rspec"
+  generate('cucumber:install --rspec --capybara')
   generate('rspec:install')
   run "rm -rf test/"
   run "mkdir spec/factories"
+  run "mkdir spec/data"
 
 # Git it
   git :init

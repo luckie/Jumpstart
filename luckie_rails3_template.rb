@@ -32,7 +32,6 @@
   gem 'haml'
   gem 'haml-rails'
   gem 'pg'
-  gem 'rails', '3.0.3'
   gem 'ruby-debug'
   gem 'will_paginate', '3.0.pre2'
 

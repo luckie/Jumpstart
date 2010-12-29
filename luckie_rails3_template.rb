@@ -36,19 +36,17 @@
   gem 'ruby-debug'
   gem 'will_paginate', '3.0.pre2'
 
-  group :development, :test do
-    gem 'capybara', '~> 0.4.0'
-    gem 'cucumber-rails'
-    gem 'database_cleaner'
-    gem 'factory_girl_rails'
-    gem 'ffaker'
-    gem 'launchy'
-    gem 'mocha', '0.9.7'
-    gem 'pickler', '~> 0.1.7'
-    gem 'rspec-rails'
-    gem 'shoulda'
-    gem 'spork'
-  end
+  gem 'capybara', '~> 0.4.0', :group => [:development, :test]
+  gem 'cucumber-rails', :group => [:development, :test]
+  gem 'database_cleaner', :group => [:development, :test]
+  gem 'factory_girl_rails', :group => [:development, :test]
+  gem 'ffaker', :group => [:development, :test]
+  gem 'launchy', :group => [:development, :test]
+  gem 'mocha', '0.9.7', :group => [:development, :test]
+  gem 'pickler', '~> 0.1.7', :group => [:development, :test]
+  gem 'rspec-rails', :group => [:development, :test]
+  gem 'shoulda', :group => [:development, :test]
+  gem 'spork', :group => [:development, :test]
 
 # Install gems
   run "bundle install"

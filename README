@@ -8,16 +8,10 @@ To create a new Rails 2.3.5 app based on the Luckie Template:
 
 Rails 3.0
 
-NOTE: This template requires Ruby 1.9 and Rails 3
-
-If you don't already have Rails 3 running:
-
-  rvm update
-  rvm reload
-  rvm install 1.9.2 -C --enable-shared=yes
-  rvm use ruby-1.9.2-p0
-  gem install rails
-
 To create a new Rails 3 app based on the Luckie Template:
 
   rails new my_app --database=mysql --template=~/projects/jumpstart/luckie_rails3_template.rb
+
+To create a new Rails 3 app to deploy to Heroku:
+
+  rails new some_new_app -J -T -d postgresql -m ~/projects/jumpstart/heroku_template.rb

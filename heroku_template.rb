@@ -24,7 +24,7 @@ run 'rm .gitignore'
 create_file ".gitignore", gitignore
 
 gemfile = <<-GEMFILE
-gem 'decent_exposure', '1.0.0.rc3'
+gem 'decent_exposure'
 gem 'devise'
 gem 'haml'
 gem 'haml-rails'

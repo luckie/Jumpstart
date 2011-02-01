@@ -1,5 +1,5 @@
 rvmrc = <<-RVMRC
-rvm --create use use "ree-1.8.7-2010.02@#{app_name}"
+rvm --create use "ree-1.8.7-2010.02@#{app_name}"
 RVMRC
 
 create_file ".rvmrc", rvmrc

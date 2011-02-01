@@ -1,17 +1,15 @@
-Rails 2.3.5
+== Rails 2.3
 
-To create a new Rails 2.3.5 app based on the Luckie Template:
+  To create a new Rails 2.3.5 app based on the Luckie Template:
 
   rails my_app --database=mysql --template=~/projects/jumpstart/luckie_template.rb
 
-==========================================
+== Rails 3
 
-Rails 3.0
+  To create a new Rails 3 app to deploy to EY:
 
-To create a new Rails 3 app based on the Luckie Template:
+  rails new my_new_app -J -T -d mysql -m ~/projects/jumpstart/ey_template.rb
 
-  rails new my_app --database=mysql --template=~/projects/jumpstart/luckie_rails3_template.rb
+  To create a new Rails 3 app to deploy to Heroku:
 
-To create a new Rails 3 app to deploy to Heroku:
-
-  rails new some_new_app -J -T -d postgresql -m ~/projects/jumpstart/heroku_template.rb
+  rails new my_new_app -J -T -d postgresql -m ~/projects/jumpstart/heroku_template.rb

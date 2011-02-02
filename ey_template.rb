@@ -124,7 +124,8 @@ notes = <<-NOTES
 Run the following commands to complete the setup of #{app_name}:
 
 hcd #{app_name}
-gem install bundler && bundle
+gem install engineyard bundler
+bundle install
 rails g rspec:install && rails g cucumber:install --rspec --capybara
 cp config/database.example.yml config/database.yml
 rake db:create:all && rake db:migrate && rake db:setup

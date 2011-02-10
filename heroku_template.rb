@@ -98,7 +98,7 @@ Welcome to #{app_name.humanize}
 Getting Started
 ---------------
 
-    clone git@github.com:luckie/#{app_name}.git
+    git clone git@github.com:luckie/#{app_name}.git
     hcd #{app_name}
     cp config/database.example.yml config/database.yml
     gem install bundler

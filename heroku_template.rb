@@ -26,7 +26,6 @@ create_file ".gitignore", gitignore
 gemfile = <<-GEMFILE
 gem 'decent_exposure'
 gem 'devise'
-gem 'haml'
 gem 'haml-rails'
 gem 'will_paginate', '3.0.pre2'
 

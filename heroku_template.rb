@@ -1,5 +1,5 @@
 rvmrc = <<-RVMRC
-rvm --create use "ree-1.8.7-2010.02@#{app_name}"
+rvm --create use "ruby-1.9.2-p180@#{app_name}"
 RVMRC
 
 create_file ".rvmrc", rvmrc

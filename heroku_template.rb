@@ -39,7 +39,7 @@ group :development, :test do
   gem 'launchy'
   gem 'pickler'
   gem 'rspec-rails'
-  gem 'ruby-debug'
+  gem 'ruby-debug19', require: 'ruby-debug'
   gem 'shoulda'
   gem 'spork'
 end

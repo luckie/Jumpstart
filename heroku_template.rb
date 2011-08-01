@@ -127,7 +127,7 @@ gem install heroku bundler
 bundle install
 rails g rspec:install && rails g cucumber:install --rspec --capybara
 cp config/database.example.yml config/database.yml
-rake db:create:all && rake db:migrate && rake db:setup
+rake db:create:all db:migrate db:setup
 ===============================================================================
 NOTES
 

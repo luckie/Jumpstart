@@ -76,7 +76,7 @@ DB
 create_file "config/database.example.yml", db
 
 # Replace default js with jquery
-run "curl -L http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js > public/javascripts/jquery.js"
+run "curl -L http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js > public/javascripts/jquery.js"
 run "curl -L https://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js"
 
 gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery rails)'

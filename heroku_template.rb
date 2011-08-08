@@ -27,15 +27,12 @@ gemfile = <<-GEMFILE
 gem 'decent_exposure'
 gem 'devise'
 gem 'haml'
-gem 'will_paginate', '3.0.pre2'
 
 group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
-  gem 'ffaker'
-  gem 'haml-rails'
+  gem 'fabrication'
   gem 'launchy'
   gem 'pickler'
   gem 'rspec-rails'
@@ -100,7 +97,7 @@ Getting Started
 
     git clone git@github.com:luckie/#{app_name}.git
     hcd #{app_name}
-    cp config/database.example.yml config/database.yml
+    cp config/database{.example,}.yml
     gem install bundler
     bundle
 
@@ -126,6 +123,7 @@ hcd #{app_name}
 gem install heroku bundler
 bundle install
 rails g rspec:install && rails g cucumber:install --rspec --capybara
+rails g fabrication:cucumber_steps
 cp config/database.example.yml config/database.yml
 rake db:create:all db:migrate db:setup
 ===============================================================================

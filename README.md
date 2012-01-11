@@ -12,4 +12,4 @@
 
   To create a new Rails 3 app to deploy to Heroku:
 
-  rails new my_new_app -J -T -d postgresql -m ~/projects/jumpstart/heroku_template.rb
+  rails new my_new_app --skip-bundle -T -d postgresql -m https://raw.github.com/luckie/Jumpstart/master/heroku_template.rb

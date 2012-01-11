@@ -1,38 +1,28 @@
-rvmrc = <<-RVMRC
-rvm --create use "ruby-1.9.2-p290@#{app_name}"
-RVMRC
+file '.rvmrc', "rvm --create use \"ruby-1.9.2-p290@#{app_name}\""
 
-create_file ".rvmrc", rvmrc
-
-gitignore = <<-GITIGNORE
+run 'rm .gitignore'
+file '.gitignore', <<-GITIGNORE
 *~
 .DS_Store
-capybara-*.html
+.bundle
 config/database.yml
-db/*.db
-db/*.sql
-doc/api
-doc/app
 log/*.log
 *.swo
 *.swp
-*.swn
-tmp/**/*
+tmp/
+tags
 GITIGNORE
 
-run 'rm .gitignore'
-create_file ".gitignore", gitignore
+install_devise = yes?('Do you want to install devise?')
 
 gem 'decent_exposure'
-gem 'devise'
+gem 'devise' if install_devise
 gem 'haml'
+gem 'pg'
 
-gem_group :development do
+gem_group :test, :development do
   gem 'heroku'
   gem 'ruby-debug19', require: 'ruby-debug'
-end
-
-gem_group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'escape_utils'
@@ -44,10 +34,10 @@ gem_group :test do
 end
 
 # Database config
-db = <<-DB
+file 'config/database.example.yml', <<-DB
 <% ['development', 'test].each do |env| %>
 <%= env %>:
-  database: <%= "#{Rails.root.basename.to_s.underscore}_#{env}" %>
+  database: <%= "\#{Rails.root.basename.to_s.underscore}_\#{env}" %>
   adapter: postgresql
   encoding: unicode
   pool: 5
@@ -57,16 +47,11 @@ db = <<-DB
 <% end %>
 DB
 
-create_file "config/database.example.yml", db
-
-# Gitkeep some dirs
-create_file "log/.gitkeep"
-create_file "tmp/.gitkeep"
+run 'cp config/database{.example,}.yml'
 
 # Cleanup
-run "rm -f app/views/layouts/application.html.erb"
-run "rm -f public/index.html"
-run "rm -f README"
+run "rm app/views/layouts/application.html.erb"
+run "rm public/index.html"
 
 # Create basic README file
 file 'README.md', <<-EOF
@@ -98,19 +83,17 @@ git :init
 git :add => '.'
 
 # Done!
-notes = <<-NOTES
+log <<-NOTES
 
 ===============================================================================
 Run the following commands to complete the setup of #{app_name}:
 
-hcd #{app_name}
+pcd #{app_name}
 gem install bundler
 bundle install
-rails g rspec:install
 rails g devise:install
+rails g rspec:install
 cp config/database.example.yml config/database.yml
 rake db:create:all db:migrate db:setup
 ===============================================================================
 NOTES
-
-log notes

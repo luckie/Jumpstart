@@ -1,5 +1,5 @@
 rvmrc = <<-RVMRC
-rvm --create use "ruby-1.9.2-p180@#{app_name}"
+rvm --create use "ruby-1.9.2-p290@#{app_name}"
 RVMRC
 
 create_file ".rvmrc", rvmrc
@@ -23,60 +23,41 @@ GITIGNORE
 run 'rm .gitignore'
 create_file ".gitignore", gitignore
 
-gemfile = <<-GEMFILE
 gem 'decent_exposure'
 gem 'devise'
 gem 'haml'
 
-group :development, :test do
+gem_group :development do
+  gem 'heroku'
+  gem 'ruby-debug19', require: 'ruby-debug'
+end
+
+gem_group :test do
   gem 'capybara'
-  gem 'cucumber-rails'
   gem 'database_cleaner'
+  gem 'escape_utils'
   gem 'fabrication'
   gem 'launchy'
-  gem 'pickler'
   gem 'rspec-rails'
   gem 'ruby-debug19', require: 'ruby-debug'
   gem 'shoulda'
-  gem 'spork'
 end
-GEMFILE
-
-append_file 'Gemfile', gemfile
 
 # Database config
 db = <<-DB
-common: &common
+<% ['development', 'test].each do |env| %>
+<%= env %>:
+  database: <%= "#{Rails.root.basename.to_s.underscore}_#{env}" %>
   adapter: postgresql
   encoding: unicode
   pool: 5
   username:
   password:
   min_messages: warning
-
-production:
-  database: #{app_name}_production
-  <<: *common
-
-development:
-  database: #{app_name}_development
-  <<: *common
-
-test: &test
-  database: #{app_name}_test
-  <<: *common
-
-cucumber:
-  <<: *test
+<% end %>
 DB
 
 create_file "config/database.example.yml", db
-
-# Replace default js with jquery
-run "curl -L http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js > public/javascripts/jquery.js"
-run "curl -L https://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js"
-
-gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery rails)'
 
 # Gitkeep some dirs
 create_file "log/.gitkeep"
@@ -89,11 +70,9 @@ run "rm -f README"
 
 # Create basic README file
 file 'README.md', <<-EOF
-Welcome to #{app_name.humanize}
-===============================================================================
+# Welcome to #{app_name.humanize}
 
-Getting Started
----------------
+## Getting Started
 
     git clone git@github.com:luckie/#{app_name}.git
     hcd #{app_name}
@@ -107,9 +86,14 @@ Getting Started
 
     # Run the test suites
     rake
+
+## Heroku Setup
+
+    git remote add staging git@heroku.com:heroku-app-name-staging.git
+
+    git remote add production git@heroku.com:heroku-app-name.git
 EOF
 
-# Git it
 git :init
 git :add => '.'
 
@@ -120,10 +104,10 @@ notes = <<-NOTES
 Run the following commands to complete the setup of #{app_name}:
 
 hcd #{app_name}
-gem install heroku bundler
+gem install bundler
 bundle install
-rails g rspec:install && rails g cucumber:install --rspec --capybara
-rails g fabrication:cucumber_steps
+rails g rspec:install
+rails g devise:install
 cp config/database.example.yml config/database.yml
 rake db:create:all db:migrate db:setup
 ===============================================================================

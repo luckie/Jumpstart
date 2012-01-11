@@ -84,15 +84,15 @@ git :add => '.'
 # Done!
 log <<-NOTES
 
-===============================================================================
+================================================================================
 Run the following commands to complete the setup of #{app_name}:
 
 pcd #{app_name}
 gem install bundler
 bundle install
-rails g devise:install
-rails g rspec:install
 cp config/database.example.yml config/database.yml
 rake db:create:all db:migrate db:setup
-===============================================================================
+rails g devise:install
+rails g rspec:install
+================================================================================
 NOTES

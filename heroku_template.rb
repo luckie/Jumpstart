@@ -13,10 +13,9 @@ tmp/
 tags
 GITIGNORE
 
-install_devise = yes?('Do you want to install devise?')
 
 gem 'decent_exposure'
-gem 'devise' if install_devise
+gem 'devise'
 gem 'haml'
 gem 'pg'
 

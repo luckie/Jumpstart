@@ -34,7 +34,7 @@ end
 
 # Database config
 file 'config/database.example.yml', <<-DB
-<% ['development', 'test].each do |env| %>
+<% ['development', 'test'].each do |env| %>
 <%= env %>:
   database: <%= "\#{Rails.root.basename.to_s.underscore}_\#{env}" %>
   adapter: postgresql
